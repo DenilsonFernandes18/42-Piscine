@@ -3,35 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: denilson42 <denilson42@student.42.fr>      +#+  +:+       +#+        */
+/*   By: denferna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/11 16:06:12 by denilson42        #+#    #+#             */
-/*   Updated: 2026/03/11 16:06:12 by denilson42       ###   ########.fr       */
+/*   Created: 2024/12/11 20:03:27 by denferna          #+#    #+#             */
+/*   Updated: 2024/12/11 20:03:35 by denferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <unistd.h>
+
+#include "ft_header.h"
 
 int	ft_atoi(char *str)
 {
 	int	i;
-	int	sinal;
-	int	res;
+	int	j;
+	int	nb;
 
 	i = 0;
-	sinal = 1;
-	res = 0;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
+	while (ft_is_printable(str[i]))
 		i++;
-	while (str[i] == '+' || str[i] == '-')
+	i--;
+	j = 0;
+	while (str[i] && j < 2)
 	{
-		if (str[i] == '-')
-			sinal *= -1;
-		i++;
+		i--;
+		j++;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
+	j = 0;
+	nb = 0;
+	while (ft_is_number(str[j]) && j < i)
 	{
-		res = res * 10 + (str[i] - '0');
-		i++;
+		nb = nb * 10 + str[j] - '0';
+		j++;
 	}
-	return (res * sinal);
+	return (nb);
 }

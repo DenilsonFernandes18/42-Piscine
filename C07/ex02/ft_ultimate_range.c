@@ -1,37 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_ultimate_range.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: denilson42 <denilson42@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/11 16:06:12 by denilson42        #+#    #+#             */
-/*   Updated: 2026/03/11 16:06:12 by denilson42       ###   ########.fr       */
+/*   Created: 2026/04/17 21:23:26 by denilson42        #+#    #+#             */
+/*   Updated: 2026/04/17 21:23:26 by denilson42       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <unistd.h>
+#include <stdlib.h>
 
-int	ft_atoi(char *str)
+int	ft_ultimate_range(int **range, int min, int max)
 {
 	int	i;
-	int	sinal;
-	int	res;
+	int	size;
 
 	i = 0;
-	sinal = 1;
-	res = 0;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
-		i++;
-	while (str[i] == '+' || str[i] == '-')
+	if (min >= max)
 	{
-		if (str[i] == '-')
-			sinal *= -1;
+		*range = NULL;
+		return (0);
+	}
+	size = max - min;
+	*range = malloc(sizeof(int) * size);
+	if (!(*range))
+		return (-1);
+	while (i < size)
+	{
+		(*range)[i] = min;
+		min++;
 		i++;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		res = res * 10 + (str[i] - '0');
-		i++;
-	}
-	return (res * sinal);
+	return (size);
 }
